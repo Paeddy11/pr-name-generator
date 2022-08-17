@@ -12,6 +12,8 @@ const PrNameGenerator: FC = () => {
     storyName: ""
   });
   const MAX_PR_LENGTH = 54;
+  const isPrNameIsTooLong = fullPrName.length > MAX_PR_LENGTH;
+  const prNameTooLongText = `${fullPrName.length} and therefore more than the allowed ${MAX_PR_LENGTH} characters. Plz truncate the pr name while keeping the full words`
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
     setPrName(prev => ({...prev, [event.target.name]:event.target.value}));
@@ -49,7 +51,7 @@ const PrNameGenerator: FC = () => {
         <label htmlFor="storyId" className="w-1/4 pr-5 font-semibold"> 
           Jira Story ID: 
         </label>
-        <input type="text" name="storyId" id="storyId" onChange={onHandleChange} aria-label="Jira Story ID" placeholder="ECH-1111" required pattern="\s+[A-Za-z]*-[1-9]*\s+" className="pl-5 w-3/4 float-right"></input>
+        <input type="text" name="storyId" id="storyId" onChange={onHandleChange} aria-label="Jira Story ID" placeholder="ECH-1111" required pattern="\s*[A-Za-z]*-[0-9]*\s*" className="pl-5 w-3/4 float-right"></input>
       </div>
         <div className="m-4">
           <label htmlFor="storyName" className="w-1/4 pr-5 font-semibold">
@@ -66,9 +68,9 @@ const PrNameGenerator: FC = () => {
       <span className={
         cls(
           "ml-5",
-          fullPrName.length > MAX_PR_LENGTH && "text-red-500"
+          isPrNameIsTooLong && "text-red-500"
         )}
-      >Length of PR: {fullPrName.length} </span>
+      >Length of PR is {isPrNameIsTooLong ? prNameTooLongText : fullPrName.length} </span>
     </div>
     </>
   );

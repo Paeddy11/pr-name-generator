@@ -13,7 +13,7 @@ const PrNameGenerator: FC = () => {
   });
   const MAX_PR_LENGTH = 54;
   const isPrNameIsTooLong = fullPrName.length > MAX_PR_LENGTH;
-  const prNameTooLongText = `${fullPrName.length} and therefore more than the allowed ${MAX_PR_LENGTH} characters. Plz truncate the pr name while keeping the full words`
+  const prNameTooLongText = `${fullPrName.length} and therefore more than the allowed ${MAX_PR_LENGTH} characters. Plz truncate the pr name while keeping full words`
 
   const onHandleChange = (event: ChangeEvent<HTMLInputElement|HTMLSelectElement>) => {
     setPrName(prev => ({...prev, [event.target.name]:event.target.value}));
